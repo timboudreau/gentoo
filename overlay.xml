@@ -2,8 +2,8 @@
 <layman>
   <overlay name="timboudreau" quality="experimental" status="unofficial" type="hg"
     src="http://timboudreau.com/code/gentoo-overlay"
-    contact="tim@timboudreau.com>
+    contact="tim@timboudreau.com">
     <link>http://timboudreau.com/code/gentoo-overlay</link>
-    <description>Tim Boudreau's experimental overlay</description>
+    <description>Tim Boudreau's Gentoo overlay</description>
   </overlay>
 </layman>
