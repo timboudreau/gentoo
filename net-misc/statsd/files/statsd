@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+var args = process.argv.slice(2);
+if (args.length === 0) {
+  console.log('Usage: statsd configfile');
+  process.exit(1);
+}
+require('/usr/lib/statsd/stats.js');

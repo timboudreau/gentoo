@@ -1,0 +1,47 @@
+#!/sbin/runscript
+# Copyright 1999-2004 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/www-servers/nginx/files/nginx.init-r2,v 1.1 2010/01/03 19:51:41 djc Exp $
+
+PROGNAME=statsd
+PIDPATH=/var/run/${PROGNAME}
+PIDFILE=${PIDPATH}/${PROGNAME}.pid
+LOGPATH=/var/log/${PROGNAME}
+DATADIR=/var/lib/${PROGNAME}
+
+depend() {
+	need net
+	use dns
+}
+
+start() {
+    if [ ! -d $PIDPATH ] ; then
+        mkdir -p $PIDPATH
+        chown $STATSD_USER $PIDPATH
+    fi
+    if [ ! -d $LOGPATH ] ; then
+        mkdir -p $LOGPATH
+        chown $STATSD_USER $LOGPATH
+    fi
+
+	ebegin "Starting $PROGNAME"
+	start-stop-daemon --start --pidfile $PIDFILE \
+		--user $STATSD_USER \
+		--background -1 $LOGPATH/$PROGNAME.log -2 $LOGPATH/$PROGNAME.err \
+		--ionice 1 --make-pidfile \
+		--exec /usr/bin/statsd -- $STATSD_CONFIG
+	eend $? "Failed to start $PROGNAME"
+}
+
+stop() {
+	ebegin "Stopping $PROGNAME"
+	start-stop-daemon --stop --pidfile $PIDFILE
+	eend $? "Failed to stop $PROGNAME"
+	rm -f /var/run/nginx.pid
+}
+
+reload() {
+	ebegin "Refreshing nginx' configuration"
+	kill -HUP `cat $PIDFILE` &>/dev/null
+	eend $? "Failed to reload $PROGNAME"
+}
