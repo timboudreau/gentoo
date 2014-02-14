@@ -12,19 +12,21 @@ EGIT_COMMIT="v${PV}"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="man minimal"
 
-DEPEND="app-text/ronn"
+DEPEND="man? ( app-text/ronn )"
 
-RDEPEND="net-libs/nodejs"
+RDEPEND=">=net-libs/nodejs-0.8.8"
 
 src_compile() {
     ebegin "Building statsd man pages"
-    ronn -m ${WORKDIR}/statsd-${PV}/README.md > ${T}/statsd.1
-    ronn -m ${WORKDIR}/statsd-${PV}/docs/backend.md > ${T}/statsd.2
-    ronn -m ${WORKDIR}/statsd-${PV}/docs/graphite.md > ${T}/statsd.3
-    ronn -m ${WORKDIR}/statsd-${PV}/docs/namespacing.md > ${T}/statsd.4
-    ronn -m ${WORKDIR}/statsd-${PV}/docs/admin_interface.md > ${T}/statsd.5
+    if use man ; then
+        ronn -m ${WORKDIR}/statsd-${PV}/README.md > ${T}/statsd.1
+        ronn -m ${WORKDIR}/statsd-${PV}/docs/backend.md > ${T}/statsd.2
+        ronn -m ${WORKDIR}/statsd-${PV}/docs/graphite.md > ${T}/statsd.3
+        ronn -m ${WORKDIR}/statsd-${PV}/docs/namespacing.md > ${T}/statsd.4
+        ronn -m ${WORKDIR}/statsd-${PV}/docs/admin_interface.md > ${T}/statsd.5
+    fi
     eend ${?}
 }
 
@@ -41,17 +43,21 @@ src_install() {
     cp ${WORKDIR}/statsd-${PV}/proxy.js ${D}/usr/lib/statsd/
 
     dodir /etc
-    dodir /usr/share/statsd/examples
-    cp -R ${WORKDIR}/statsd-${PV}/examples/* ${D}/usr/share/statsd/examples
-    cp ${WORKDIR}/statsd-${PV}/exampleConfig.js ${D}/etc/statsd-config.js
+    if ! use minimal ; then
+        dodir /usr/share/statsd/examples
+        cp -R ${WORKDIR}/statsd-${PV}/examples/* ${D}/usr/share/statsd/examples
+        cp ${WORKDIR}/statsd-${PV}/exampleConfig.js ${D}/etc/statsd-config.js
+    fi
 
     newinitd "${FILESDIR}"/statsd.initd statsd
     newconfd "${FILESDIR}"/statsd.confd statsd
-    doman ${T}/statsd.1
-    doman ${T}/statsd.2
-    doman ${T}/statsd.3
-    doman ${T}/statsd.4
-    doman ${T}/statsd.5
+    if use man ; then
+        doman ${T}/statsd.1
+        doman ${T}/statsd.2
+        doman ${T}/statsd.3
+        doman ${T}/statsd.4
+        doman ${T}/statsd.5
+    fi
     eend ${?}
 }
 
