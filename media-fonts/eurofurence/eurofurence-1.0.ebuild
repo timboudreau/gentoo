@@ -22,13 +22,7 @@ FONT_CONF=( "${FILESDIR}/62-eurofurence.conf" )
 src_install() {
 	insinto /usr/share/fonts/${PN}
 
-	for f in "${MY_PN}" "${MY_PN}P" "${MY_PN}PB" "${MY_PN}PS" "${MY_PN}TTF" ; do
-		cd "${WORKDIR}/${f}-${PV}"
-		doins  *.ttf
-		newdoc README README.${f}
-		newdoc README.ja README.ja.${f}
-		newdoc ChangeLog ChangeLog.${f}
-	done
+	doins  *.ttf
 
 	font_xfont_config
 	font_fontconfig
