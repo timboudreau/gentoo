@@ -1,8 +1,0 @@
-Stuff to add:
-
-obmenu-generator
-obmenu
-obconf
-obtheme
-notification-daemon
-
