@@ -46,8 +46,8 @@ src_install() {
     if ! use minimal ; then
         dodir /usr/share/statsd/examples
         cp -R ${WORKDIR}/statsd-${PV}/examples/* ${D}/usr/share/statsd/examples
-        cp ${WORKDIR}/statsd-${PV}/exampleConfig.js ${D}/etc/statsd-config.js
     fi
+    cp ${WORKDIR}/statsd-${PV}/exampleConfig.js ${D}/etc/statsd-config.js
 
     newinitd "${FILESDIR}"/statsd.initd statsd
     newconfd "${FILESDIR}"/statsd.confd statsd
