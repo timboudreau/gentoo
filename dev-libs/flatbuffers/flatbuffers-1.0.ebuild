@@ -3,7 +3,7 @@ inherit git-2
 # inherit user
 
 DESCRIPTION="Memory Efficient Serialization Library"
-HOMEPAGE="https://github.com/google/flatbuffers"
+HOMEPAGE="http://google.github.io/flatbuffers/"
 SRC_URI=""
 
 EGIT_REPO_URI="https://github.com/google/flatbuffers.git"
