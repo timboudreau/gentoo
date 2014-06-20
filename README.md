@@ -4,6 +4,8 @@ A Gentoo Portage Overlay
 This is a package repository for [Gentoo Linux](http://gentoo.org) which
 contains a few things I've found useful, in particular
 
+ * [flatbuffers](http://google.github.io/flatbuffers/md__building.html) - Google's copy-free data 
+serialization library for Java and C
  * [etcd](https://github.com/coreos/etcd) - a high-availability key/value thingy similar to
 Zookeeper but hopefully less awful
  * [statsd](https://github.com/etsy/statsd/) - Etsy's statsd, a thing for collecting statistics and 
