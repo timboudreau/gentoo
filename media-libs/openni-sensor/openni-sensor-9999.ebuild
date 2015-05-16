@@ -29,9 +29,16 @@ src_prepare() {
 }
 
 src_compile() {
-	cd ${WORKDIR}/${P}/Platform/Linux/Build
+#	cd ${WORKDIR}/${P}/Platform/Linux/Build
+	echo Run RedistMaker in ${WORKDIR}/${P}/Platform/Linux/CreateRedist
+	cd ${WORKDIR}/${P}/Platform/Linux/CreateRedist/ && ${WORKDIR}/${P}/Platform/Linux/CreateRedist/RedistMaker
+
 #	parallel build fails as lOpenNI is references before it exists
-	emake -j1 redist || die "emake failed"
+#	emake -j1 redist || die "emake failed"
+#	echo Create ${WORKDIR}/${P}/Platform/Linux/Redist
+#	mkdir -p ${WORKDIR}/${P}/Platform/Linux/Redist
+
+#	cd ${WORKDIR}/${P}/Platform/Linux/CreateRedist
 }
 
 src_install() {
