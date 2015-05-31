@@ -3,13 +3,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/www-servers/nginx/files/nginx.init-r2,v 1.1 2010/01/03 19:51:41 djc Exp $
 
-APPSPATH=/var/lib/etcd
-PROGNAME=etcd
+APPSPATH=/var/lib/syncthing
+PROGNAME=syncthing
 PIDPATH=/var/run/${PROGNAME}
 PIDFILE=${PIDPATH}/${PROGNAME}.pid
 LOGPATH=/var/log/${PROGNAME}
-DATADIR=/var/lib/${PROGNAME}
-USER=etcd
 
 depend() {
 	need net
@@ -17,25 +15,31 @@ depend() {
 }
 
 start() {
-    if [ ! -d $PIDPATH ] ; then
-        mkdir -p $PIDPATH
-        chown $USER $PIDPATH
-    fi
-    if [ ! -d $LOGPATH ] ; then
-        mkdir -p $LOGPATH
-        chown $USER $LOGPATH
-    fi
-    if [ ! -d $ETCD_DATA ] ; then
-        mkdir -p $ETCD_DATA
-        chown $USER $ETCD_DATA
-    fi
+	if [ ! -d $PIDPATH ] ; then
+		mkdir -p $PIDPATH
+		chown $USER $PIDPATH
+	fi
+	if [ ! -d $LOGPATH ] ; then
+		mkdir -p $LOGPATH
+		chown $USER $LOGPATH
+	fi
+	if [ -z ${USER} ]; then 
+		echo USER is not set in /etc/conf.d/syncthing - edit that variable to the name of an existing user and try again
+		return 1
+	fi
+	if [ -f $PIDFILE ]; then
+		chown $USER $PIDFILE
+	fi
+	if [ -f $LOGPATH ]; then
+		chown -R $LOGPATH/* $USER
+	fi
 
 	ebegin "Starting $PROGNAME"
 	start-stop-daemon --start --pidfile $PIDFILE \
 		--user $USER --chdir $ETCD_DATA \
 		--background -1 $LOGPATH/$PROGNAME.log -2 $LOGPATH/$PROGNAME.err \
 		--ionice 1 --make-pidfile \
-		--exec /usr/bin/etcd -- -name=$ETCD_NAME -data-dir=$ETCD_DATA $ETCD_OPTS
+		--exec /usr/bin/syncthing -- -no-browser $SYNCTHING_OPTS
 	eend $? "Failed to start $PROGNAME"
 }
 
@@ -43,11 +47,6 @@ stop() {
 	ebegin "Stopping $PROGNAME"
 	start-stop-daemon --stop --pidfile $PIDFILE
 	eend $? "Failed to stop $PROGNAME"
-	rm -f $PIDFILE
+	rm -f /var/run/$PIDFILE
 }
 
-reload() {
-	ebegin "Refreshing nginx' configuration"
-	kill -HUP `cat $PIDFILE` &>/dev/null
-	eend $? "Failed to reload $PROGNAME"
-}
