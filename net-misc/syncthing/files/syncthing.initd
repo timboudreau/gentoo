@@ -36,7 +36,7 @@ start() {
 
 	ebegin "Starting $PROGNAME"
 	start-stop-daemon --start --pidfile $PIDFILE \
-		--user $USER --chdir $ETCD_DATA \
+		--user $USER \
 		--background -1 $LOGPATH/$PROGNAME.log -2 $LOGPATH/$PROGNAME.err \
 		--ionice 1 --make-pidfile \
 		--exec /usr/bin/syncthing -- -no-browser $SYNCTHING_OPTS
