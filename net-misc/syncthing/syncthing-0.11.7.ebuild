@@ -52,6 +52,8 @@ src_install() {
 	echo "Then run"
 	echo "	rc-update add syncthing default"
 	echo "to enable it on startup"
+	echo ""
+	echo "Once syncthing is running, go to http://localhost:8384/ to set up files to synchronize."
     eend ${?}
 }
 
