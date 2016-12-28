@@ -63,7 +63,7 @@ src_install() {
 	doman ${_DEST}/syncthing/man/syncthing-networking.7
 	doman ${_DEST}/syncthing/man/syncthing-security.7
 	doman ${_DEST}/syncthing/man/syncthing-versioning.7
-	newinitd "${FILESDIR}"/syncthing.initd syncthing
+	newinitd "${FILESDIR}"/syncthing.initd-openrc-run syncthing
 	newconfd "${FILESDIR}"/syncthing.conf syncthing
 	echo "Created /etc/init.d/syncthing to launch on startup"
 	echo "If you want to use this, edit /etc/conf.d/syncthing and set the USER variable to your user name."
