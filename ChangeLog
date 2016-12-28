@@ -1,3 +1,5 @@
+1.14 Fix syncthing 0.14.17 manifest
+***********************************
 1.13 Convert syncthing 0.14.17 init script to openrc-run
 ***********************************
 1.12 Updated syncthing to 0.14.17
