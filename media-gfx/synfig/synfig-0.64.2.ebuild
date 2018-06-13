@@ -10,7 +10,7 @@ MY_PN=synfig
 DESCRIPTION="Synfig core engine and libraries"
 HOMEPAGE="http://www.synfig.org/"
 EGIT_REPO_URI="git://github.com/synfig/${MY_PN}.git"
-EGIT_COMMIT="0.64.2"
+EGIT_COMMIT="v${PV}"
 
 LICENSE="GPL-2"
 SLOT="0"

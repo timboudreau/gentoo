@@ -17,6 +17,7 @@ DEPEND="dev-lang/go"
 
 _DEST=${WORKDIR}/src/github.com/syncthing/syncthing
 
+
 src_compile() {
 	ebegin "Building syncthing ${EGIT_COMMIT}"
 	SRCS=${WORKDIR}/src/github.com/syncthing
