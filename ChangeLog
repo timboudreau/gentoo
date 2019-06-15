@@ -1,3 +1,5 @@
+1.23 Add patched libnfc - calling it 1.7.1-r1 because, what version should it be?
+**********************************
 1.22 Update gnatsd and nats-streaming-server
 **********************************
 1.21 Fix syncthing manifest
