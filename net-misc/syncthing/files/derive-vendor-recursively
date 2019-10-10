@@ -1,0 +1,69 @@
+#!/usr/bin/python
+import fnmatch
+import os
+import re
+import subprocess
+import sys
+
+# A quick generator for EGO_VENDOR based on found
+# go.mod files - this could be improved, but at least
+# is less painful than manually maintaining it
+
+matches = []
+h=re.compile(r'^\s(\S*?\.\S{2,3}/\S+)\s([^-\s\+]+)$')
+q=re.compile(r'^\s(\S*?\.\S{2,3}/\S+)\s([^-\s\+]+)\+.*$')
+g=re.compile(r'^\s(\S*?\.\S{2,3}/\S+)\s([^-\s\+]+)\s?\/.*$')
+j=re.compile(r'^\s(\S*?\.\S{2,3}/\S+)\s\S*?-\S*?([0-9a-f]+)[\s\/$]')
+
+# XXX these could be mapped - are they always consistent?
+hardcodedUrls = {
+	"golang.org/x/crypto" : "github.com/golang/crypto",
+	"golang.org/x/net" : "github.com/golang/net",
+	"golang.org/x/sys" : "github.com/golang/sys",
+	"golang.org/x/text" : "github.com/golang/text",
+	"golang.org/x/time" : "github.com/golang/time",
+	"gopkg.in/asn1-ber.v1" : "github.com/go-asn1-ber/asn1-ber",
+	"gopkg.in/check.v1" : "github.com/go-check/check",
+	"gopkg.in/ldap.v2" : "github.com/go-ldap/ldap"
+}
+
+print "DIR " + sys.argv[1]
+
+wk = os.walk(sys.argv[1])
+gomod = re.compile(r'^.*go\.mod.*$')
+
+for root, dirs, files in wk:
+	for fn in files:
+		if 'go.mod' == fn:
+			pth = os.path.join(root, fn)
+			matches.append(pth)
+
+versions=dict()
+
+for m in matches:
+	print '#\t' + m
+	o=open(m, 'r')
+	for i in o:
+		m = re.search(h, i)
+		if not m:
+			m = re.search(g, i)
+		if not m:
+			m = re.search(j, i)
+		if not m:
+			m = re.search(q, i)
+		if m:
+			pkg = m.group(1);
+			rev = m.group(2);
+			if not pkg in versions:
+				versions[pkg] = rev
+
+print 'export EGO_VENDOR=('
+for pkg in versions:
+	if pkg in hardcodedUrls:
+		print '"' + pkg + ' ' + versions[pkg] + ' ' + hardcodedUrls[pkg] + '"'
+	else:	
+		print '"' + pkg + ' ' + versions[pkg] + '"'
+
+print ')'
+
+

@@ -1,3 +1,5 @@
+1.26 Update syncthing now w/ go modules; add net-misc/mailsync since it is about to be removed from portage; wip on synfig
+**********************************
 1.25 Update Adobe Source Code Pro font, add Source Sans Pro
 **********************************
 1.24 Updated gnatsd -> nats-server
