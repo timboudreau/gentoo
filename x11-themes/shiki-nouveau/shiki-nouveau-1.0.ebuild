@@ -1,4 +1,4 @@
-EAPI=4
+EAPI=7
 
 DESCRIPTION=""
 HOMEPAGE="http://karashata.deviantart.com/art/Shiki-Nouveau-2012-11-01-318365469"
