@@ -1,4 +1,4 @@
-EAPI=3
+EAPI=6
 inherit font
 
 MY_PN="bp-mono"
@@ -18,11 +18,18 @@ RDEPEND=""
 # Only installs fonts
 RESTRICT="strip binchecks"
 FONT_CONF=( "${FILESDIR}/69-bp-mono.conf" )
+S="${WORKDIR}/${PN}"
+FONT_SUFFIX="ttf"
+
+src_unpack() {
+	/usr/bin/unzip "${DISTDIR}/${A}" -d "${S}"
+}
+
 
 src_install() {
 	insinto /usr/share/fonts/${PN}
 
-        cd "${WORKDIR}"
+        cd "${S}"
 	doins *.ttf
 
 	font_xfont_config

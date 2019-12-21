@@ -1,4 +1,4 @@
-EAPI=3
+EAPI=6
 inherit font
 
 MY_PN="b20-sans"
@@ -19,12 +19,16 @@ RDEPEND=""
 RESTRICT="strip binchecks"
 FONT_CONF=( "${FILESDIR}/67-b20-sans.conf" )
 
+S="${WORKDIR}/${PN}"
+FONT_SUFFIX="ttf"
+
+src_unpack() {
+	/usr/bin/unzip "${DISTDIR}/${A}" -d "${S}"
+}
+
 src_install() {
 	insinto /usr/share/fonts/${PN}
-
-        cd "${WORKDIR}"
-	doins *.ttf
-
+	doins "${S}/B20Sans.ttf"
 	font_xfont_config
 	font_fontconfig
 }

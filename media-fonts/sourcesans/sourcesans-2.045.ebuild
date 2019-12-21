@@ -1,4 +1,4 @@
-EAPI=3
+EAPI=6
 inherit font
 
 MY_PN="SourceSansPro"
@@ -18,11 +18,12 @@ RDEPEND=""
 RESTRICT="strip binchecks"
 FONT_CONF=( "${FILESDIR}/67-sourcesans.conf" )
 
+S="${WORKDIR}/source-sans-pro-2.045R-ro-1.095R-it"
+FONT_SUFFIX="ttf"
+
 src_install() {
 	insinto /usr/share/fonts/${PN}
-
 	doins ${WORKDIR}/source-sans-pro-2.045R-ro-1.095R-it/TTF/*.ttf
-
 	font_xfont_config
 	font_fontconfig
 }

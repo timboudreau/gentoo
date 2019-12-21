@@ -1,4 +1,4 @@
-EAPI=3
+EAPI=6
 inherit font
 
 MY_PN="advanced-sans-serif"
@@ -18,12 +18,20 @@ RDEPEND=""
 # Only installs fonts
 RESTRICT="strip binchecks"
 FONT_CONF=( "${FILESDIR}/68-advanced-sans-serif.conf" )
+S="${WORKDIR}/${PN}"
+FONT_SUFFIX="ttf"
+
+# advanced_sans_serif_7_bold.ttf  advanced_sans_serif_7_screen.png  advanced_sans_serif_7.ttf 
+
+src_unpack() {
+	/usr/bin/unzip "${DISTDIR}/${A}" -d "${S}"
+}
 
 src_install() {
 	insinto /usr/share/fonts/${PN}
 
-        cd "${WORKDIR}"
-	doins *.ttf
+	doins "${S}/advanced_sans_serif_7.ttf"
+	doins "${S}/advanced_sans_serif_7_bold.ttf"
 
 	font_xfont_config
 	font_fontconfig

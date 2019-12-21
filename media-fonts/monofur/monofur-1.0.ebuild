@@ -1,4 +1,4 @@
-EAPI=3
+EAPI=6
 inherit font
 
 MY_PN="monofur"
@@ -19,14 +19,16 @@ RDEPEND=""
 RESTRICT="strip binchecks"
 FONT_CONF=( "${FILESDIR}/61-monofur.conf" )
 
+S="${WORKDIR}/${PN}"
+FONT_SUFFIX="ttf"
+
+src_unpack() {
+	/usr/bin/unzip "${DISTDIR}/${A}" -d "${S}"
+}
+
 src_install() {
 	insinto /usr/share/fonts/${PN}
-
-	for f in "${MY_PN}" "${MY_PN}P" "${MY_PN}PB" "${MY_PN}PS" "${MY_PN}TTF" ; do
-                cd "${WORKDIR}"
-		doins monof55.ttf
-	done
-
+	doins "${S}/monof55.ttf"
 	font_xfont_config
 	font_fontconfig
 }

@@ -1,4 +1,4 @@
-EAPI=3
+EAPI=6
 inherit font
 
 MY_PN="bowman"
@@ -18,13 +18,17 @@ RDEPEND=""
 # Only installs fonts
 RESTRICT="strip binchecks"
 FONT_CONF=( "${FILESDIR}/70-bowman.conf" )
+S="${WORKDIR}/${PN}"
+FONT_SUFFIX="ttf"
+
+src_unpack() {
+	/usr/bin/unzip "${DISTDIR}/${A}" -d "${S}"
+}
 
 src_install() {
 	insinto /usr/share/fonts/${PN}
 
-        cd "${WORKDIR}"
-	doins *.ttf
-
+	doins "${S}/Bowman.ttf"
 	font_xfont_config
 	font_fontconfig
 }
