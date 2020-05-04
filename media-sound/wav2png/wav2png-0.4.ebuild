@@ -4,13 +4,13 @@
 
 EAPI=5
 
-inherit eutils git-2 multilib
+inherit eutils git-r3 multilib
 
 MY_PN="wav2png"
 DESCRIPTION="Wav2png audio file thumbnailer"
 HOMEPAGE="https://github.com/beschulz/${MY_PN}/"
-EGIT_REPO_URI="git://github.com/beschulz/${MY_PN}.git"
-EGIT_COMMIT="master"
+EGIT_REPO_URI="https://github.com/beschulz/${MY_PN}.git"
+EGIT_COMMIT="$PV"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -38,4 +38,3 @@ src_compile() {
 src_install() {
 	dobin bin/Linux/wav2png
 }
-
