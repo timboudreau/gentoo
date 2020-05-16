@@ -1,8 +1,0 @@
-# The name of this node in the cluster
-ETCD_NAME=etcd
-
-# WHere the data lives
-ETCD_DATA=/var/lib/etcd/data
-
-# Add things like -discovery $URL, cluster info, other options here
-ETCD_OPTS=""

@@ -1,3 +1,5 @@
+1.32 Remove etcd - there is an official package now
+**********************************
 1.31 Update flatbuffers and use git-r3 eclass
 **********************************
 1.30 Use wav2png-0.4 and update eclass
