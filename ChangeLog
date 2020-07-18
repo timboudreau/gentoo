@@ -1,3 +1,5 @@
+1.33 Remove obsolete syncthing builds that inherited git-2 which is gone
+**********************************
 1.32 Remove etcd - there is an official package now
 **********************************
 1.31 Update flatbuffers and use git-r3 eclass
