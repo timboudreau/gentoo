@@ -1,4 +1,4 @@
-EAPI=6
+EAPI=7
 inherit font
 
 MY_PN="monofur"
