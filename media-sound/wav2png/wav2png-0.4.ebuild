@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-libs/openni/openni-9999.ebuild,v 1.2 2011/10/31 09:16:53 frostwork Exp $
 
-EAPI=5
+EAPI=7
 
 inherit eutils git-r3 multilib
 

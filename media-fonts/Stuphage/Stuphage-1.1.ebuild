@@ -28,17 +28,16 @@ src_unpack() {
 src_install() {
         echo "S is ${S}"
 	insinto /usr/share/fonts/${PN}
-	doins "${S}/${PN}/${PN}-medium.ttf"
-	doins "${S}/${PN}/${PN}-medium-italic.ttf"
-	doins "${S}/${PN}/${PN}-bold.ttf"
-	doins "${S}/${PN}/${PN}-bold-italic.ttf"
-	doins "${S}/${PN}/${PN}-thin.ttf"
-	doins "${S}/${PN}/${PN}-thin-italic.ttf"
-	doins "${S}/${PN}/${PN}-black.ttf"
-	doins "${S}/${PN}/${PN}-black-italic.ttf"
-	doins "${S}/${PN}/${PN}-verylight.ttf"
-	doins "${S}/${PN}/${PN}-verylight-italic.ttf"
+	doins "${S}/${PN}/${PN}-Regular.ttf"
+	doins "${S}/${PN}/${PN}-RegularItalic.ttf"
+	doins "${S}/${PN}/${PN}-Bold.ttf"
+	doins "${S}/${PN}/${PN}-BoldItalic.ttf"
+	doins "${S}/${PN}/${PN}-Thin.ttf"
+	doins "${S}/${PN}/${PN}-ThinItalic.ttf"
+	doins "${S}/${PN}/${PN}-Black.ttf"
+	doins "${S}/${PN}/${PN}-BlackItalic.ttf"
+	doins "${S}/${PN}/${PN}-VeryLight.ttf"
+	doins "${S}/${PN}/${PN}-VeryLightItalic.ttf"
 	font_xfont_config
 	font_fontconfig
 }
-
