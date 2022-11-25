@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS="~x86"
 IUSE=""
 
-COMMON_DEPEND=">=dev-cpp/pngpp-0.2.9 >=media-libs/libsndfile-1.0.26 >=media-libs/libpng-1.2 >=dev-util/boost-build-1.6"
+COMMON_DEPEND=">=dev-cpp/pngpp-0.2.9 >=media-libs/libsndfile-1.0.26 >=media-libs/libpng-1.2 >=dev-util/boost-build-1.7"
 
 DEPEND=""
 
