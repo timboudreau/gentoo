@@ -8,8 +8,6 @@ HOMEPAGE="http://mailsync.sourceforge.net/"
 #SRC_URI="mirror://sourceforge/${PN}/${PN}_${PV}.orig.tar.gz"
 SRC_URI="https://versaweb.dl.sourceforge.net/project/mailsync/mailsync/5.2.7/mailsync_5.2.7-1.tar.gz"
 
-# https://sourceforge.net/projects/mailsync/files/mailsync/5.2.7/mailsync_5.2.7-1.tar.gz/download
-
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc x86"
