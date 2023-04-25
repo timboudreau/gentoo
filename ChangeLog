@@ -1,3 +1,5 @@
+1.41  Update mailsync to 5.2.7-1
+**********************************
 1.40. Remove net-misc/syncthing as net-p2p/syncthing is in gentoo main repo
 **********************************
 1.39 Bump version of boost-build for wav2png-0.4 so it does not pull in an old version
